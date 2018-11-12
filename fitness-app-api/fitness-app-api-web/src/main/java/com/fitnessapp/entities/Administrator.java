@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Naluem
  */
 @Entity
-@Table(catalog = "fitness-app", schema = "public", uniqueConstraints = {
+@Table(catalog = "fitnessapp", schema = "public", uniqueConstraints = {
 	@UniqueConstraint(columnNames = {"user_name"})})
 @XmlRootElement
 @NamedQueries({

@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Naluem
  */
 @Entity
-@Table(name = "daily_advanced_workout", catalog = "fitness-app", schema = "public")
+@Table(name = "daily_advanced_workout", catalog = "fitnessapp", schema = "public")
 @XmlRootElement
 @NamedQueries({
 	@NamedQuery(name = "DailyAdvancedWorkout.findAll", query = "SELECT d FROM DailyAdvancedWorkout d"),

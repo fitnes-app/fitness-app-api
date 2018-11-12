@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Naluem
  */
 @Entity
-@Table(name = "body_type", catalog = "fitness-app", schema = "public")
+@Table(name = "body_type", catalog = "fitnessapp", schema = "public")
 @XmlRootElement
 @NamedQueries({
 	@NamedQuery(name = "BodyType.findAll", query = "SELECT b FROM BodyType b"),
