@@ -37,14 +37,14 @@ public class SurveyFacadeREST extends AbstractFacade<Survey> {
 
 	@POST
         @Override
-        @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Consumes({MediaType.APPLICATION_JSON})
 	public void create(Survey entity) {
 		super.create(entity);
 	}
 
 	@PUT
         @Path("{id}")
-        @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Consumes({MediaType.APPLICATION_JSON})
 	public void edit(@PathParam("id") Integer id, Survey entity) {
 		super.edit(entity);
 	}
@@ -57,21 +57,21 @@ public class SurveyFacadeREST extends AbstractFacade<Survey> {
 
 	@GET
         @Path("{id}")
-        @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Produces({MediaType.APPLICATION_JSON})
 	public Survey find(@PathParam("id") Integer id) {
 		return super.find(id);
 	}
 
 	@GET
         @Override
-        @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Produces({MediaType.APPLICATION_JSON})
 	public List<Survey> findAll() {
 		return super.findAll();
 	}
 
 	@GET
         @Path("{from}/{to}")
-        @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Produces({MediaType.APPLICATION_JSON})
 	public List<Survey> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
 		return super.findRange(new int[]{from, to});
 	}

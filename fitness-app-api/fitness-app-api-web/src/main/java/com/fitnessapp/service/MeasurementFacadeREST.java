@@ -37,14 +37,14 @@ public class MeasurementFacadeREST extends AbstractFacade<Measurement> {
 
 	@POST
         @Override
-        @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Consumes({MediaType.APPLICATION_JSON})
 	public void create(Measurement entity) {
 		super.create(entity);
 	}
 
 	@PUT
         @Path("{id}")
-        @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Consumes({MediaType.APPLICATION_JSON})
 	public void edit(@PathParam("id") Integer id, Measurement entity) {
 		super.edit(entity);
 	}
@@ -57,21 +57,21 @@ public class MeasurementFacadeREST extends AbstractFacade<Measurement> {
 
 	@GET
         @Path("{id}")
-        @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Produces({MediaType.APPLICATION_JSON})
 	public Measurement find(@PathParam("id") Integer id) {
 		return super.find(id);
 	}
 
 	@GET
         @Override
-        @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Produces({MediaType.APPLICATION_JSON})
 	public List<Measurement> findAll() {
 		return super.findAll();
 	}
 
 	@GET
         @Path("{from}/{to}")
-        @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Produces({MediaType.APPLICATION_JSON})
 	public List<Measurement> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
 		return super.findRange(new int[]{from, to});
 	}

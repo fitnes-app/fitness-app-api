@@ -37,14 +37,14 @@ public class BasicExerciseFacadeREST extends AbstractFacade<BasicExercise> {
 
 	@POST
         @Override
-        @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Consumes({MediaType.APPLICATION_JSON})
 	public void create(BasicExercise entity) {
 		super.create(entity);
 	}
 
 	@PUT
         @Path("{id}")
-        @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Consumes({MediaType.APPLICATION_JSON})
 	public void edit(@PathParam("id") Integer id, BasicExercise entity) {
 		super.edit(entity);
 	}
@@ -57,21 +57,21 @@ public class BasicExerciseFacadeREST extends AbstractFacade<BasicExercise> {
 
 	@GET
         @Path("{id}")
-        @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Produces({MediaType.APPLICATION_JSON})
 	public BasicExercise find(@PathParam("id") Integer id) {
 		return super.find(id);
 	}
 
 	@GET
         @Override
-        @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Produces({MediaType.APPLICATION_JSON})
 	public List<BasicExercise> findAll() {
 		return super.findAll();
 	}
 
 	@GET
         @Path("{from}/{to}")
-        @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Produces({MediaType.APPLICATION_JSON})
 	public List<BasicExercise> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
 		return super.findRange(new int[]{from, to});
 	}

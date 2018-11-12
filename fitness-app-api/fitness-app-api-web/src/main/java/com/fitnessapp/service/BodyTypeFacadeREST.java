@@ -37,14 +37,14 @@ public class BodyTypeFacadeREST extends AbstractFacade<BodyType> {
 
 	@POST
         @Override
-        @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Consumes({MediaType.APPLICATION_JSON})
 	public void create(BodyType entity) {
 		super.create(entity);
 	}
 
 	@PUT
         @Path("{id}")
-        @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Consumes({MediaType.APPLICATION_JSON})
 	public void edit(@PathParam("id") Integer id, BodyType entity) {
 		super.edit(entity);
 	}
@@ -57,21 +57,21 @@ public class BodyTypeFacadeREST extends AbstractFacade<BodyType> {
 
 	@GET
         @Path("{id}")
-        @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Produces({MediaType.APPLICATION_JSON})
 	public BodyType find(@PathParam("id") Integer id) {
 		return super.find(id);
 	}
 
 	@GET
         @Override
-        @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Produces({MediaType.APPLICATION_JSON})
 	public List<BodyType> findAll() {
 		return super.findAll();
 	}
 
 	@GET
         @Path("{from}/{to}")
-        @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+        @Produces({MediaType.APPLICATION_JSON})
 	public List<BodyType> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
 		return super.findRange(new int[]{from, to});
 	}
