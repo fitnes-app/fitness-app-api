@@ -49,76 +49,76 @@ public class Survey implements Serializable {
     @Size(max = 500)
     @Column(length = 500)
     private String description;
-    @OneToMany(mappedBy = "surveyId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "surveyId", fetch = FetchType.EAGER)
     @XmlTransient
     private transient List<Question> questionList;
     @JoinColumn(name = "tag_id", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Tag tagId;
 
     public Survey() {
     }
 
     public Survey(Integer id) {
-        this.id = id;
+            this.id = id;
     }
 
     public Integer getId() {
-        return id;
+            return id;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+            this.id = id;
     }
 
     public String getDescription() {
-        return description;
+            return description;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+            this.description = description;
     }
 
+    @XmlTransient
     public List<Question> getQuestionList() {
-        return questionList;
+            return questionList;
     }
 
     public void setQuestionList(List<Question> questionList) {
-        this.questionList = questionList;
+            this.questionList = questionList;
     }
 
     public Tag getTagId() {
-        return tagId;
+            return tagId;
     }
 
     public void setTagId(Tag tagId) {
-        this.tagId = tagId;
+            this.tagId = tagId;
     }
-    
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+            int hash = 0;
+            hash += (id != null ? id.hashCode() : 0);
+            return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Survey)) {
-            return false;
-        }
-        Survey other = (Survey) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+            // TODO: Warning - this method won't work in the case the id fields are not set
+            if (!(object instanceof Survey)) {
+                    return false;
+            }
+            Survey other = (Survey) object;
+            if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+                    return false;
+            }
+            return true;
     }
 
     @Override
     public String toString() {
-        return "com.fitnessapp.entities.Survey[ id=" + id + " ]";
+            return "com.fitnessapp.entities.Survey[ id=" + id + " ]";
     }
 
 }

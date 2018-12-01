@@ -52,7 +52,7 @@ public class Tag implements Serializable {
 	private String tagName;
 	@OneToMany(mappedBy = "tagId", fetch = FetchType.EAGER)
         @XmlTransient
-	private List<Survey> surveyList;
+	private transient List<Survey> surveyList;
 
 	public Tag() {
 	}
