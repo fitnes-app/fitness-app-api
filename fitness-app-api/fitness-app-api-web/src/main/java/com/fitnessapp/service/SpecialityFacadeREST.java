@@ -5,7 +5,6 @@
  */
 package com.fitnessapp.service;
 
-import com.fitnessapp.entities.MuscularGroup;
 import com.fitnessapp.entities.Speciality;
 import java.util.List;
 import javax.ejb.Stateless;

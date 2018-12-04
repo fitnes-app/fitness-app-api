@@ -49,7 +49,7 @@ public class Speciality implements Serializable{
     @Size(min = 1, max = 100)
     @Column(name = "speciality_name", nullable = false, length = 200)
     private String specialityName;
-    @OneToMany(mappedBy = "trainerId", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "specialityId", fetch = FetchType.EAGER)
     private List<Trainer> trainerList;
 
     public Speciality() {
