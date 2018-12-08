@@ -9,7 +9,10 @@ import com.fitnessapp.entities.Administrator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -62,6 +65,19 @@ public class AdministratorFacadeREST extends AbstractFacade<Administrator> {
 		return super.find(id);
 	}
 
+        @GET
+        @Path("findByUserName/{username}")
+        @Produces({MediaType.APPLICATION_JSON})
+        public Administrator findByUsername(@PathParam("username") String username) {
+            EntityManagerFactory emf
+                    = Persistence.createEntityManagerFactory("fitnessapp_0.0.1PU");
+            EntityManager em = emf.createEntityManager();
+            TypedQuery<Administrator> consultaAdministrator = em.createNamedQuery("Administrator.findByUserName", Administrator.class);
+            consultaAdministrator.setParameter("userName", username);
+            return consultaAdministrator.getSingleResult();
+        }
+
+    
 	@GET
         @Override
         @Produces({MediaType.APPLICATION_JSON})
