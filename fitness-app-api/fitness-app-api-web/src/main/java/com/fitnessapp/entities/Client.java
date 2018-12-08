@@ -24,6 +24,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -35,6 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(catalog = "fitnessapp", schema = "public", uniqueConstraints = {
 	@UniqueConstraint(columnNames = {"user_name"})})
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
 	@NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c"),
 	@NamedQuery(name = "Client.findById", query = "SELECT c FROM Client c WHERE c.id = :id"),
@@ -79,18 +82,23 @@ public class Client implements Serializable {
         @Column(length = 100)
 	private String address;
 	@OneToMany(mappedBy = "clientId", fetch = FetchType.EAGER)
-	private List<CustomRoutine> customRoutineList;
+        @XmlTransient
+	private transient List<CustomRoutine> customRoutineList;
 	@OneToMany(mappedBy = "clientId", fetch = FetchType.EAGER)
-	private List<BasicClientTracking> basicClientTrackingList;
+        @XmlTransient
+	private transient List<BasicClientTracking> basicClientTrackingList;
 	@OneToMany(mappedBy = "clientId", fetch = FetchType.EAGER)
-	private List<Measurement> measurementList;
+        @XmlTransient
+	private transient List<Measurement> measurementList;
 	@OneToMany(mappedBy = "clientId", fetch = FetchType.EAGER)
-	private List<Answer> answerList;
+        @XmlTransient
+	private transient List<Answer> answerList;
 	@JoinColumn(name = "body_type_id", referencedColumnName = "id")
         @ManyToOne(fetch = FetchType.EAGER)
 	private BodyType bodyTypeId;
 	@OneToMany(mappedBy = "clientId", fetch = FetchType.EAGER)
-	private List<AdvancedClientTracking> advancedClientTrackingList;
+        @XmlTransient
+	private transient List<AdvancedClientTracking> advancedClientTrackingList;
 
 	public Client() {
 	}
