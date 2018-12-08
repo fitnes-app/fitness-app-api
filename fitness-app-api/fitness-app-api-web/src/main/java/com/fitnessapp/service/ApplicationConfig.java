@@ -45,11 +45,11 @@ public class ApplicationConfig extends Application {
 		resources.add(com.fitnessapp.service.MeasurementFacadeREST.class);
 		resources.add(com.fitnessapp.service.MuscularGroupFacadeREST.class);
 		resources.add(com.fitnessapp.service.QuestionFacadeREST.class);
+		resources.add(com.fitnessapp.service.SpecialityFacadeREST.class);
 		resources.add(com.fitnessapp.service.SpecificTipFacadeREST.class);
 		resources.add(com.fitnessapp.service.SurveyFacadeREST.class);
 		resources.add(com.fitnessapp.service.TagFacadeREST.class);
-		resources.add(com.fitnessapp.service.TrainerFacadeREST.class);
-                resources.add(com.fitnessapp.service.SpecialityFacadeREST.class);
+                resources.add(com.fitnessapp.service.TrainerFacadeREST.class);
 	}
 	
 }
