@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Naluem
  */
 @Entity
-@Table(catalog = "fitnessapp", schema = "public")
+@Table(name = "tag", catalog = "fitnessapp", schema = "public")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
@@ -82,7 +82,6 @@ public class Tag implements Serializable {
 		this.tagName = tagName;
 	}
 
-	@XmlTransient
 	public List<Survey> getSurveyList() {
 		return surveyList;
 	}

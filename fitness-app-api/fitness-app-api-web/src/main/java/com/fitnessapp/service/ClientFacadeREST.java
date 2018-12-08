@@ -6,10 +6,14 @@
 package com.fitnessapp.service;
 
 import com.fitnessapp.entities.Client;
+import com.fitnessapp.entities.Tag;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -76,6 +80,15 @@ public class ClientFacadeREST extends AbstractFacade<Client> {
 		return super.findRange(new int[]{from, to});
 	}
 
+        @GET
+        @Path("findByEmail/{email}")
+        @Produces({MediaType.APPLICATION_JSON})
+        public List<Client> findByEmail(@PathParam("email") String email) {
+            TypedQuery<Client> consultaClient = this.em.createNamedQuery("Client.findByMail", Client.class);
+            consultaClient.setParameter("mail", email);
+            return consultaClient.getResultList();
+        }
+    
 	@GET
         @Path("count")
         @Produces(MediaType.TEXT_PLAIN)
