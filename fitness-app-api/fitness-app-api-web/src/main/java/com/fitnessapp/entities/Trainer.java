@@ -14,6 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -67,7 +69,10 @@ public class Trainer implements Serializable {
 	private String address;
 	@OneToMany(mappedBy = "trainerId", fetch = FetchType.EAGER)
 	private List<CustomRoutine> customRoutineList;
-
+        @JoinColumn(name = "speciality_id", referencedColumnName = "id")
+        @ManyToOne(fetch = FetchType.EAGER)
+        private Speciality specialityId;
+        
 	public Trainer() {
 	}
 
@@ -136,6 +141,14 @@ public class Trainer implements Serializable {
 	public void setCustomRoutineList(List<CustomRoutine> customRoutineList) {
 		this.customRoutineList = customRoutineList;
 	}
+
+        public Speciality getSpecialityId() {
+            return specialityId;
+        }
+
+        public void setSpecialityId(Speciality specialityId) {
+            this.specialityId = specialityId;
+        }
 
 	@Override
 	public int hashCode() {

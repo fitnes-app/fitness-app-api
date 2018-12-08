@@ -19,6 +19,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -29,6 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "body_type", catalog = "fitnessapp", schema = "public")
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
 	@NamedQuery(name = "BodyType.findAll", query = "SELECT b FROM BodyType b"),
 	@NamedQuery(name = "BodyType.findById", query = "SELECT b FROM BodyType b WHERE b.id = :id"),
@@ -46,11 +49,14 @@ public class BodyType implements Serializable {
         @Column(name = "body_type_value", nullable = false)
 	private int bodyTypeValue;
 	@OneToMany(mappedBy = "bodyTypeId", fetch = FetchType.EAGER)
-	private List<AdvancedWorkout> advancedWorkoutList;
+        @XmlTransient
+	private transient List<AdvancedWorkout> advancedWorkoutList;
 	@OneToMany(mappedBy = "bodyTypeId", fetch = FetchType.EAGER)
-	private List<BasicWorkout> basicWorkoutList;
+        @XmlTransient
+	private transient List<BasicWorkout> basicWorkoutList;
 	@OneToMany(mappedBy = "bodyTypeId", fetch = FetchType.EAGER)
-	private List<Client> clientList;
+        @XmlTransient
+	private transient List<Client> clientList;
 
 	public BodyType() {
 	}

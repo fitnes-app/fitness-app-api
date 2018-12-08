@@ -6,6 +6,7 @@
 package com.fitnessapp.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -44,6 +47,10 @@ public class DailyTip implements Serializable {
         @Column(nullable = false, length = 300)
 	private String text;
 
+        @Temporal(TemporalType.DATE)
+        @Column(nullable = false)
+        private Date date;
+        
 	public DailyTip() {
 	}
 
@@ -71,6 +78,14 @@ public class DailyTip implements Serializable {
 	public void setText(String text) {
 		this.text = text;
 	}
+
+        public Date getDate() {
+            return date;
+        }
+
+        public void setDate(Date date) {
+            this.date = date;
+        }
 
 	@Override
 	public int hashCode() {
