@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(catalog = "fitnessapp", schema = "public", uniqueConstraints = {
-	@UniqueConstraint(columnNames = {"user_name"})})
+	@UniqueConstraint(columnNames = {"mail"})})
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
@@ -70,11 +70,11 @@ public class Client implements Serializable {
 	@Basic(optional = false)
         @NotNull
         @Column(nullable = false)
-	private BigInteger weight;
+	private Float weight;
 	@Basic(optional = false)
         @NotNull
         @Column(nullable = false)
-	private BigInteger height;
+	private Float height;
 	@Size(max = 20)
         @Column(length = 20)
 	private String telephone;
@@ -107,7 +107,7 @@ public class Client implements Serializable {
 		this.id = id;
 	}
 
-	public Client(Integer id, String userName, BigInteger weight, BigInteger height) {
+	public Client(Integer id, String userName, Float weight, Float height) {
 		this.id = id;
 		this.userName = userName;
 		this.weight = weight;
@@ -146,19 +146,19 @@ public class Client implements Serializable {
 		this.mail = mail;
 	}
 
-	public BigInteger getWeight() {
+	public Float getWeight() {
 		return weight;
 	}
 
-	public void setWeight(BigInteger weight) {
+	public void setWeight(Float weight) {
 		this.weight = weight;
 	}
 
-	public BigInteger getHeight() {
+	public Float getHeight() {
 		return height;
 	}
 
-	public void setHeight(BigInteger height) {
+	public void setHeight(Float height) {
 		this.height = height;
 	}
 

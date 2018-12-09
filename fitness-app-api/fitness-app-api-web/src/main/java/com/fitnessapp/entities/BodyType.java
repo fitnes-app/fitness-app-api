@@ -33,9 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
-	@NamedQuery(name = "BodyType.findAll", query = "SELECT b FROM BodyType b"),
-	@NamedQuery(name = "BodyType.findById", query = "SELECT b FROM BodyType b WHERE b.id = :id"),
-	@NamedQuery(name = "BodyType.findByBodyTypeValue", query = "SELECT b FROM BodyType b WHERE b.bodyTypeValue = :bodyTypeValue")})
+    @NamedQuery(name = "BodyType.findAll", query = "SELECT b FROM BodyType b"),
+    @NamedQuery(name = "BodyType.findById", query = "SELECT b FROM BodyType b WHERE b.id = :id"),
+    @NamedQuery(name = "BodyType.findByBodyTypeValue", query = "SELECT b FROM BodyType b WHERE b.bodyTypeValue = :bodyTypeValue")})
 public class BodyType implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -47,7 +47,7 @@ public class BodyType implements Serializable {
 	@Basic(optional = false)
         @NotNull
         @Column(name = "body_type_value", nullable = false)
-	private int bodyTypeValue;
+	private String bodyTypeValue;
 	@OneToMany(mappedBy = "bodyTypeId", fetch = FetchType.EAGER)
         @XmlTransient
 	private transient List<AdvancedWorkout> advancedWorkoutList;
@@ -65,7 +65,7 @@ public class BodyType implements Serializable {
 		this.id = id;
 	}
 
-	public BodyType(Integer id, int bodyTypeValue) {
+	public BodyType(Integer id, String bodyTypeValue) {
 		this.id = id;
 		this.bodyTypeValue = bodyTypeValue;
 	}
@@ -78,11 +78,11 @@ public class BodyType implements Serializable {
 		this.id = id;
 	}
 
-	public int getBodyTypeValue() {
+	public String getBodyTypeValue() {
 		return bodyTypeValue;
 	}
 
-	public void setBodyTypeValue(int bodyTypeValue) {
+	public void setBodyTypeValue(String bodyTypeValue) {
 		this.bodyTypeValue = bodyTypeValue;
 	}
 

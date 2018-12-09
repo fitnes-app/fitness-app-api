@@ -23,6 +23,8 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -32,8 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(catalog = "fitnessapp", schema = "public", uniqueConstraints = {
-	@UniqueConstraint(columnNames = {"user_name"})})
+	@UniqueConstraint(columnNames = {"mail"})})
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
 	@NamedQuery(name = "Trainer.findAll", query = "SELECT t FROM Trainer t"),
 	@NamedQuery(name = "Trainer.findById", query = "SELECT t FROM Trainer t WHERE t.id = :id"),
@@ -68,7 +71,8 @@ public class Trainer implements Serializable {
         @Column(length = 100)
 	private String address;
 	@OneToMany(mappedBy = "trainerId", fetch = FetchType.EAGER)
-	private List<CustomRoutine> customRoutineList;
+        @XmlTransient
+	private transient List<CustomRoutine> customRoutineList;
         @JoinColumn(name = "speciality_id", referencedColumnName = "id")
         @ManyToOne(fetch = FetchType.EAGER)
         private Speciality specialityId;

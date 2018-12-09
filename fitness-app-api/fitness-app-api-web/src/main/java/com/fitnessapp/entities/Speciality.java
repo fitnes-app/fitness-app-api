@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -35,12 +36,14 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Speciality.findAll", query = "SELECT m FROM Speciality m"),
     @NamedQuery(name = "Speciality.findById", query = "SELECT m FROM Speciality m WHERE m.id = :id"),
     @NamedQuery(name = "Speciality.findBySpecialityName", query = "SELECT m FROM Speciality m WHERE m.specialityName = :pecialityName")})
-
+@SequenceGenerator(name = "SEQ", sequenceName = "speciality_seq", allocationSize = 1)
 public class Speciality implements Serializable{
     
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="speciality_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "SEQ")
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
