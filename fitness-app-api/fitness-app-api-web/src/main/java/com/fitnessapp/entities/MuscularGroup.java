@@ -20,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -30,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "muscular_group", catalog = "fitnessapp", schema = "public")
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
 	@NamedQuery(name = "MuscularGroup.findAll", query = "SELECT m FROM MuscularGroup m"),
 	@NamedQuery(name = "MuscularGroup.findById", query = "SELECT m FROM MuscularGroup m WHERE m.id = :id"),
@@ -48,11 +51,14 @@ public class MuscularGroup implements Serializable {
         @Column(name = "muscular_group_name", nullable = false, length = 100)
 	private String muscularGroupName;
 	@OneToMany(mappedBy = "muscularGroupId", fetch = FetchType.EAGER)
-	private List<SpecificTip> specificTipList;
+        @XmlTransient
+	private transient List<SpecificTip> specificTipList;
 	@OneToMany(mappedBy = "muscularGroupId", fetch = FetchType.EAGER)
-	private List<BasicExercise> basicExerciseList;
+        @XmlTransient
+	private transient List<BasicExercise> basicExerciseList;
 	@OneToMany(mappedBy = "muscularGroupId", fetch = FetchType.EAGER)
-	private List<AdvancedExercise> advancedExerciseList;
+        @XmlTransient
+	private transient List<AdvancedExercise> advancedExerciseList;
 
 	public MuscularGroup() {
 	}

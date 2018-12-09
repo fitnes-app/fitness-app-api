@@ -20,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -30,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "advanced_workout", catalog = "fitnessapp", schema = "public")
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
 	@NamedQuery(name = "AdvancedWorkout.findAll", query = "SELECT a FROM AdvancedWorkout a"),
 	@NamedQuery(name = "AdvancedWorkout.findById", query = "SELECT a FROM AdvancedWorkout a WHERE a.id = :id")})
@@ -45,9 +48,11 @@ public class AdvancedWorkout implements Serializable {
         @ManyToOne(fetch = FetchType.EAGER)
 	private BodyType bodyTypeId;
 	@OneToMany(mappedBy = "advancedWorkoutId", fetch = FetchType.EAGER)
-	private List<AdvancedExercise> advancedExerciseList;
+        @XmlTransient
+	private transient List<AdvancedExercise> advancedExerciseList;
 	@OneToMany(mappedBy = "advancedWorkoutId", fetch = FetchType.EAGER)
-	private List<DailyAdvancedWorkout> dailyAdvancedWorkoutList;
+        @XmlTransient
+	private transient List<DailyAdvancedWorkout> dailyAdvancedWorkoutList;
 
 	public AdvancedWorkout() {
 	}
