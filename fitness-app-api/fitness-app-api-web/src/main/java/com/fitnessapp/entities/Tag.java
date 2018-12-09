@@ -82,7 +82,6 @@ public class Tag implements Serializable {
 		this.tagName = tagName;
 	}
 
-	@XmlTransient
 	public List<Survey> getSurveyList() {
 		return surveyList;
 	}

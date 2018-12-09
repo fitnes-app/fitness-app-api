@@ -31,13 +31,13 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Naluem
  */
 @Entity
-@Table(name="survey", catalog = "fitnessapp", schema = "public")
+@Table(name = "survey", catalog = "fitnessapp", schema = "public")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
-	@NamedQuery(name = "Survey.findAll", query = "SELECT s FROM Survey s"),
-	@NamedQuery(name = "Survey.findById", query = "SELECT s FROM Survey s WHERE s.id = :id"),
-	@NamedQuery(name = "Survey.findByDescription", query = "SELECT s FROM Survey s WHERE s.description = :description")})
+    @NamedQuery(name = "Survey.findAll", query = "SELECT s FROM Survey s"),
+    @NamedQuery(name = "Survey.findById", query = "SELECT s FROM Survey s WHERE s.id = :id"),
+    @NamedQuery(name = "Survey.findByDescription", query = "SELECT s FROM Survey s WHERE s.description = :description")})
 public class Survey implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -120,5 +120,4 @@ public class Survey implements Serializable {
 	public String toString() {
 		return "com.fitnessapp.entities.Survey[ id=" + id + " ]";
 	}
-	
 }

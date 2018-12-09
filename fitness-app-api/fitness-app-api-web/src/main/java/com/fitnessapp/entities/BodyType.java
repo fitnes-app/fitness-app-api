@@ -137,5 +137,4 @@ public class BodyType implements Serializable {
     public String toString() {
         return "com.fitnessapp.entities.BodyType[ id=" + id + " ]";
     }
-
 }

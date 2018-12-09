@@ -54,7 +54,7 @@ public class Question implements Serializable {
 	private String text;
 	@JoinColumn(name = "survey_id", referencedColumnName = "id")
         @ManyToOne(fetch = FetchType.EAGER)
-	private Survey surveyId;
+	private Survey survey;
 	@OneToMany(mappedBy = "questionId", fetch = FetchType.EAGER)
         @XmlTransient
 	private transient List<Answer> answerList;
@@ -87,13 +87,15 @@ public class Question implements Serializable {
 		this.text = text;
 	}
 
-	public Survey getSurveyId() {
-		return surveyId;
-	}
+    public Survey getSurvey() {
+        return survey;
+    }
 
-	public void setSurveyId(Survey surveyId) {
-		this.surveyId = surveyId;
-	}
+    public void setSurvey(Survey survey) {
+        this.survey = survey;
+    }
+
+
 
 	@XmlTransient
 	public List<Answer> getAnswerList() {
