@@ -22,6 +22,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -32,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "basic_exercise", catalog = "fitnessapp", schema = "public")
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
 	@NamedQuery(name = "BasicExercise.findAll", query = "SELECT b FROM BasicExercise b"),
 	@NamedQuery(name = "BasicExercise.findById", query = "SELECT b FROM BasicExercise b WHERE b.id = :id"),
@@ -64,7 +67,8 @@ public class BasicExercise implements Serializable {
         @Column(nullable = false)
 	private int repetitions;
 	@OneToMany(mappedBy = "basicExerciseId", fetch = FetchType.EAGER)
-	private List<BasicClientTracking> basicClientTrackingList;
+        @XmlTransient
+	private transient List<BasicClientTracking> basicClientTrackingList;
 	@JoinColumn(name = "basic_workout_id", referencedColumnName = "id")
         @ManyToOne(fetch = FetchType.EAGER)
 	private BasicWorkout basicWorkoutId;

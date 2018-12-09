@@ -20,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -30,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "tag", catalog = "fitnessapp", schema = "public")
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
 	@NamedQuery(name = "Tag.findAll", query = "SELECT t FROM Tag t"),
 	@NamedQuery(name = "Tag.findById", query = "SELECT t FROM Tag t WHERE t.id = :id"),
@@ -48,7 +51,8 @@ public class Tag implements Serializable {
         @Column(name = "tag_name", nullable = false, length = 50)
 	private String tagName;
 	@OneToMany(mappedBy = "tagId", fetch = FetchType.EAGER)
-	private List<Survey> surveyList;
+        @XmlTransient
+	private transient List<Survey> surveyList;
 
 	public Tag() {
 	}
