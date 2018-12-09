@@ -25,7 +25,8 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Naluem
  */
 @Entity
-@Table(name = "administrator", catalog = "fitnessapp", schema = "public")
+@Table(catalog = "fitnessapp", schema = "public", uniqueConstraints = {
+	@UniqueConstraint(columnNames = {"mail"})})
 @XmlRootElement
 @NamedQueries({
 	@NamedQuery(name = "Administrator.findAll", query = "SELECT a FROM Administrator a"),

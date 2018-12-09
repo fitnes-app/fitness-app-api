@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(catalog = "fitnessapp", schema = "public", uniqueConstraints = {
-	@UniqueConstraint(columnNames = {"user_name"})})
+	@UniqueConstraint(columnNames = {"mail"})})
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
