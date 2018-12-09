@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(catalog = "fitnessapp", schema = "public", uniqueConstraints = {
-	@UniqueConstraint(columnNames = {"user_name"})})
+	@UniqueConstraint(columnNames = {"mail"})})
 @XmlRootElement
 @NamedQueries({
 	@NamedQuery(name = "Trainer.findAll", query = "SELECT t FROM Trainer t"),
