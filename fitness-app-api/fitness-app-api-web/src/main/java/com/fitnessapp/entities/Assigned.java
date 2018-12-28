@@ -19,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -32,7 +34,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "assigned", catalog = "fitnessapp", schema = "public")
 @XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
     @NamedQuery(name = "Assigned.findAll", query = "SELECT a FROM Assigned a"),
     @NamedQuery(name = "Assigned.findById", query = "SELECT a FROM Assigned a WHERE a.id = :id")})
@@ -44,9 +45,6 @@ public class Assigned implements Serializable {
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
-    @OneToMany(mappedBy = "assignedId", fetch = FetchType.EAGER)
-    @XmlTransient
-    private transient List<CustomRoutine> customRoutineList;
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.EAGER)
     private Client clientId;
@@ -67,15 +65,6 @@ public class Assigned implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    @XmlTransient
-    public List<CustomRoutine> getCustomRoutineList() {
-        return customRoutineList;
-    }
-
-    public void setCustomRoutineList(List<CustomRoutine> customRoutineList) {
-        this.customRoutineList = customRoutineList;
     }
 
     public Trainer getTrainerId() {
