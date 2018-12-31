@@ -6,7 +6,9 @@
 package com.fitnessapp.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -66,12 +69,17 @@ public class BasicExercise implements Serializable {
         @NotNull
         @Column(nullable = false)
 	private int repetitions;
+        
+        private Float kcal;
+        
+        @ManyToMany(fetch = FetchType.LAZY, mappedBy = "basicExercises")
+        @XmlTransient
+        private transient Set<DailyBasicWorkout> dailyBasicWorkouts = new HashSet<DailyBasicWorkout>(0);
+        
 	@OneToMany(mappedBy = "basicExerciseId", fetch = FetchType.EAGER)
         @XmlTransient
 	private transient List<BasicClientTracking> basicClientTrackingList;
-	@JoinColumn(name = "basic_workout_id", referencedColumnName = "id")
-        @ManyToOne(fetch = FetchType.EAGER)
-	private BasicWorkout basicWorkoutId;
+
 	@JoinColumn(name = "muscular_group_id", referencedColumnName = "id")
         @ManyToOne(fetch = FetchType.EAGER)
 	private MuscularGroup muscularGroupId;
@@ -139,14 +147,6 @@ public class BasicExercise implements Serializable {
 		this.basicClientTrackingList = basicClientTrackingList;
 	}
 
-	public BasicWorkout getBasicWorkoutId() {
-		return basicWorkoutId;
-	}
-
-	public void setBasicWorkoutId(BasicWorkout basicWorkoutId) {
-		this.basicWorkoutId = basicWorkoutId;
-	}
-
 	public MuscularGroup getMuscularGroupId() {
 		return muscularGroupId;
 	}
@@ -155,12 +155,27 @@ public class BasicExercise implements Serializable {
 		this.muscularGroupId = muscularGroupId;
 	}
 
+        public Float getKcal() {
+            return kcal;
+        }
+
+        public void setKcal(Float kcal) {
+            this.kcal = kcal;
+        }
 	@Override
 	public int hashCode() {
 		int hash = 0;
 		hash += (id != null ? id.hashCode() : 0);
 		return hash;
 	}
+        @XmlTransient
+        public Set<DailyBasicWorkout> getDailyBasicWorkouts() {
+            return dailyBasicWorkouts;
+        }
+
+        public void setDailyBasicWorkouts(Set<DailyBasicWorkout> dailyBasicWorkouts) {
+            this.dailyBasicWorkouts = dailyBasicWorkouts;
+        }
 
 	@Override
 	public boolean equals(Object object) {

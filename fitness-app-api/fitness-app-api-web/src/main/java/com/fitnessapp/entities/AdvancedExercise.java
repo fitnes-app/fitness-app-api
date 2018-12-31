@@ -6,7 +6,9 @@
 package com.fitnessapp.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -66,9 +69,13 @@ public class AdvancedExercise implements Serializable {
         @NotNull
         @Column(nullable = false)
 	private int repetitions;
-	@JoinColumn(name = "advanced_workout_id", referencedColumnName = "id")
-        @ManyToOne(fetch = FetchType.EAGER)
-	private AdvancedWorkout advancedWorkoutId;
+        
+        private Float kcal;
+
+        @ManyToMany(fetch = FetchType.LAZY, mappedBy = "advancedExercises")
+        @XmlTransient
+        private transient Set<DailyAdvancedWorkout> dailyAdvancedWorkouts = new HashSet<DailyAdvancedWorkout>(0);
+        
 	@JoinColumn(name = "muscular_group_id", referencedColumnName = "id")
         @ManyToOne(fetch = FetchType.EAGER)
 	private MuscularGroup muscularGroupId;
@@ -130,14 +137,6 @@ public class AdvancedExercise implements Serializable {
 		this.repetitions = repetitions;
 	}
 
-	public AdvancedWorkout getAdvancedWorkoutId() {
-		return advancedWorkoutId;
-	}
-
-	public void setAdvancedWorkoutId(AdvancedWorkout advancedWorkoutId) {
-		this.advancedWorkoutId = advancedWorkoutId;
-	}
-
 	public MuscularGroup getMuscularGroupId() {
 		return muscularGroupId;
 	}
@@ -154,6 +153,22 @@ public class AdvancedExercise implements Serializable {
 	public void setAdvancedClientTrackingList(List<AdvancedClientTracking> advancedClientTrackingList) {
 		this.advancedClientTrackingList = advancedClientTrackingList;
 	}
+
+        public Float getKcal() {
+            return kcal;
+        }
+
+        public void setKcal(Float kcal) {
+            this.kcal = kcal;
+        }
+        @XmlTransient
+        public Set<DailyAdvancedWorkout> getdailyAdvancedWorkouts() {
+            return dailyAdvancedWorkouts;
+        }
+
+        public void setdailyAdvancedWorkouts(Set<DailyAdvancedWorkout> dailyAdvancedWorkouts) {
+            this.dailyAdvancedWorkouts = dailyAdvancedWorkouts;
+        }
 
 	@Override
 	public int hashCode() {
