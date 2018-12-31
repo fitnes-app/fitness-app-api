@@ -44,13 +44,18 @@ public class BasicWorkout implements Serializable {
         @Basic(optional = false)
         @Column(nullable = false)
 	private Integer id;
-	@OneToMany(mappedBy = "basicWorkoutId", fetch = FetchType.EAGER)
-        @XmlTransient
-	private transient List<BasicExercise> basicExerciseList;
+        private String name;
+        private Integer duration;
 	@JoinColumn(name = "body_type_id", referencedColumnName = "id")
         @ManyToOne(fetch = FetchType.EAGER)
 	private BodyType bodyTypeId;
-
+        @OneToMany(mappedBy = "basicWorkoutId", fetch = FetchType.EAGER)
+        @XmlTransient
+        private transient List<DailyBasicWorkout> dailyBasicWorkoutList;
+        @OneToMany(mappedBy = "basicWorkoutId", fetch = FetchType.EAGER)
+        @XmlTransient
+        private transient List<Client> clientList;
+        
 	public BasicWorkout() {
 	}
 
@@ -66,15 +71,6 @@ public class BasicWorkout implements Serializable {
 		this.id = id;
 	}
 
-	@XmlTransient
-	public List<BasicExercise> getBasicExerciseList() {
-		return basicExerciseList;
-	}
-
-	public void setBasicExerciseList(List<BasicExercise> basicExerciseList) {
-		this.basicExerciseList = basicExerciseList;
-	}
-
 	public BodyType getBodyTypeId() {
 		return bodyTypeId;
 	}
@@ -82,6 +78,38 @@ public class BasicWorkout implements Serializable {
 	public void setBodyTypeId(BodyType bodyTypeId) {
 		this.bodyTypeId = bodyTypeId;
 	}
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Integer getDuration() {
+            return duration;
+        }
+
+        public void setDuration(Integer duration) {
+            this.duration = duration;
+        }
+        @XmlTransient
+        public List<Client> getClientList() {
+            return clientList;
+        }
+
+        public void setClientList(List<Client> clientList) {
+            this.clientList = clientList;
+        }
+        @XmlTransient
+        public List<DailyBasicWorkout> getDailyBasicWorkoutList() {
+            return dailyBasicWorkoutList;
+        }
+
+        public void setDailyBasicWorkoutList(List<DailyBasicWorkout> dailyBasicWorkoutList) {
+            this.dailyBasicWorkoutList = dailyBasicWorkoutList;
+        }
 
 	@Override
 	public int hashCode() {
