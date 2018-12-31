@@ -6,7 +6,6 @@
 package com.fitnessapp.entities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -99,7 +98,15 @@ public class Client implements Serializable {
 	@OneToMany(mappedBy = "clientId", fetch = FetchType.EAGER)
         @XmlTransient
 	private transient List<AdvancedClientTracking> advancedClientTrackingList;
+        @JoinColumn(name = "advanced_workout_id", referencedColumnName = "id")
+        @ManyToOne(fetch = FetchType.EAGER)
+        private AdvancedWorkout advancedWorkout;
 
+        @JoinColumn(name = "basic_workout_id", referencedColumnName = "id")
+        @ManyToOne(fetch = FetchType.EAGER)
+        private BasicWorkout basicWorkout;
+        private boolean is_premium;
+        
 	public Client() {
 	}
 
@@ -230,6 +237,30 @@ public class Client implements Serializable {
 	public void setAdvancedClientTrackingList(List<AdvancedClientTracking> advancedClientTrackingList) {
 		this.advancedClientTrackingList = advancedClientTrackingList;
 	}
+
+        public AdvancedWorkout getAdvancedWorkout() {
+            return advancedWorkout;
+        }
+
+        public void setAdvancedWorkout(AdvancedWorkout advancedWorkout) {
+            this.advancedWorkout = advancedWorkout;
+        }
+
+        public BasicWorkout getBasicWorkout() {
+            return basicWorkout;
+        }
+
+        public void setBasicWorkout(BasicWorkout basicWorkout) {
+            this.basicWorkout = basicWorkout;
+        }
+
+        public boolean isIs_Premium() {
+            return is_premium;
+        }
+
+        public void setIs_Premium(boolean isPremium) {
+            this.is_premium = isPremium;
+        }
 
 	@Override
 	public int hashCode() {
