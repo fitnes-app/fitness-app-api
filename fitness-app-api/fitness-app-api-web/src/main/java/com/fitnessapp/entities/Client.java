@@ -34,19 +34,19 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(catalog = "fitnessapp", schema = "public", uniqueConstraints = {
-	@UniqueConstraint(columnNames = {"mail"})})
+    @UniqueConstraint(columnNames = {"mail"})})
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
-	@NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c"),
-	@NamedQuery(name = "Client.findById", query = "SELECT c FROM Client c WHERE c.id = :id"),
-	@NamedQuery(name = "Client.findByUserName", query = "SELECT c FROM Client c WHERE c.userName = :userName"),
-	@NamedQuery(name = "Client.findByUserPassword", query = "SELECT c FROM Client c WHERE c.userPassword = :userPassword"),
-	@NamedQuery(name = "Client.findByMail", query = "SELECT c FROM Client c WHERE c.mail = :mail"),
-	@NamedQuery(name = "Client.findByWeight", query = "SELECT c FROM Client c WHERE c.weight = :weight"),
-	@NamedQuery(name = "Client.findByHeight", query = "SELECT c FROM Client c WHERE c.height = :height"),
-	@NamedQuery(name = "Client.findByTelephone", query = "SELECT c FROM Client c WHERE c.telephone = :telephone"),
-	@NamedQuery(name = "Client.findByAddress", query = "SELECT c FROM Client c WHERE c.address = :address")})
+    @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c"),
+    @NamedQuery(name = "Client.findById", query = "SELECT c FROM Client c WHERE c.id = :id"),
+    @NamedQuery(name = "Client.findByUserName", query = "SELECT c FROM Client c WHERE c.userName = :userName"),
+    @NamedQuery(name = "Client.findByUserPassword", query = "SELECT c FROM Client c WHERE c.userPassword = :userPassword"),
+    @NamedQuery(name = "Client.findByMail", query = "SELECT c FROM Client c WHERE c.mail = :mail"),
+    @NamedQuery(name = "Client.findByWeight", query = "SELECT c FROM Client c WHERE c.weight = :weight"),
+    @NamedQuery(name = "Client.findByHeight", query = "SELECT c FROM Client c WHERE c.height = :height"),
+    @NamedQuery(name = "Client.findByTelephone", query = "SELECT c FROM Client c WHERE c.telephone = :telephone"),
+    @NamedQuery(name = "Client.findByAddress", query = "SELECT c FROM Client c WHERE c.address = :address")})
 public class Client implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -98,6 +98,9 @@ public class Client implements Serializable {
 	@OneToMany(mappedBy = "clientId", fetch = FetchType.EAGER)
         @XmlTransient
 	private transient List<AdvancedClientTracking> advancedClientTrackingList;
+        @OneToMany(mappedBy = "clientId", fetch = FetchType.EAGER)
+        @XmlTransient
+        private transient List<Assigned> assignedList;
         @JoinColumn(name = "advanced_workout_id", referencedColumnName = "id")
         @ManyToOne(fetch = FetchType.EAGER)
         private AdvancedWorkout advancedWorkout;
@@ -237,7 +240,14 @@ public class Client implements Serializable {
 	public void setAdvancedClientTrackingList(List<AdvancedClientTracking> advancedClientTrackingList) {
 		this.advancedClientTrackingList = advancedClientTrackingList;
 	}
+        @XmlTransient
+        public List<Assigned> getAssignedList() {
+            return assignedList;
+        }
 
+        public void setAssignedList(List<Assigned> assignedList) {
+            this.assignedList = assignedList;
+        }
         public AdvancedWorkout getAdvancedWorkout() {
             return advancedWorkout;
         }
