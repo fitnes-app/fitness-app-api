@@ -22,6 +22,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -32,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "speciality", catalog = "fitnessapp", schema = "public")
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
     @NamedQuery(name = "Speciality.findAll", query = "SELECT m FROM Speciality m"),
     @NamedQuery(name = "Speciality.findById", query = "SELECT m FROM Speciality m WHERE m.id = :id"),
@@ -53,7 +56,8 @@ public class Speciality implements Serializable{
     @Column(name = "speciality_name", nullable = false, length = 200)
     private String specialityName;
     @OneToMany(mappedBy = "specialityId", fetch = FetchType.EAGER)
-    private List<Trainer> trainerList;
+    @XmlTransient
+    private transient List<Trainer> trainerList;
 
     public Speciality() {
     }

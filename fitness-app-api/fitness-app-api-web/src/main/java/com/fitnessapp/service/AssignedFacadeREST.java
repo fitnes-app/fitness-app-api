@@ -1,11 +1,11 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package com.fitnessapp.service;
 
-import com.fitnessapp.entities.DailyTip;
+import com.fitnessapp.entities.Assigned;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -22,30 +22,30 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author Naluem
+ * @author alex
  */
 @Stateless
-@Path("dailytip")
-public class DailyTipFacadeREST extends AbstractFacade<DailyTip> {
+@Path("assigned")
+public class AssignedFacadeREST extends AbstractFacade<Assigned> {
 
 	@PersistenceContext(unitName = "fitnessapp_0.0.1PU")
 	private EntityManager em;
 
-	public DailyTipFacadeREST() {
-		super(DailyTip.class);
+	public AssignedFacadeREST() {
+		super(Assigned.class);
 	}
 
 	@POST
         @Override
         @Consumes({MediaType.APPLICATION_JSON})
-	public void create(DailyTip entity) {
+	public void create(Assigned entity) {
 		super.create(entity);
 	}
 
 	@PUT
         @Path("{id}")
         @Consumes({MediaType.APPLICATION_JSON})
-	public void edit(@PathParam("id") Integer id, DailyTip entity) {
+	public void edit(@PathParam("id") Integer id, Assigned entity) {
 		super.edit(entity);
 	}
 
@@ -58,21 +58,21 @@ public class DailyTipFacadeREST extends AbstractFacade<DailyTip> {
 	@GET
         @Path("{id}")
         @Produces({MediaType.APPLICATION_JSON})
-	public DailyTip find(@PathParam("id") Integer id) {
+	public Assigned find(@PathParam("id") Integer id) {
 		return super.find(id);
 	}
 
 	@GET
         @Override
         @Produces({MediaType.APPLICATION_JSON})
-	public List<DailyTip> findAll() {
+	public List<Assigned> findAll() {
 		return super.findAll();
 	}
 
 	@GET
         @Path("{from}/{to}")
         @Produces({MediaType.APPLICATION_JSON})
-	public List<DailyTip> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+	public List<Assigned> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
 		return super.findRange(new int[]{from, to});
 	}
 
