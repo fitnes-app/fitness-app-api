@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -75,6 +76,15 @@ public class AssignedFacadeREST extends AbstractFacade<Assigned> {
 	public List<Assigned> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
 		return super.findRange(new int[]{from, to});
 	}
+
+        @GET
+        @Path("findByClientId/{clientId}")
+        @Produces({MediaType.APPLICATION_JSON})
+        public List<Assigned> findByClientId(@PathParam("clientId") String clientId){
+            TypedQuery<Assigned> consultaAssigned = this.em.createNamedQuery("Assigned.findByClientId", Assigned.class);
+            consultaAssigned.setParameter("id", Integer.parseInt(clientId));
+            return consultaAssigned.getResultList();
+        }
 
 	@GET
         @Path("count")
