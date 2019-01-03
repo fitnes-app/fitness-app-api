@@ -58,7 +58,7 @@ public class DailyAdvancedWorkout implements Serializable {
 
         @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
         @JoinTable(name = "adv_daily_exercise_assign", joinColumns = {
-        @JoinColumn(name = "adv_workout_id", nullable = false, updatable = false)},
+        @JoinColumn(name = "daily_adv_workout_id", nullable = false, updatable = false)},
             inverseJoinColumns = {
                 @JoinColumn(name = "adv_exercise_id",
                         nullable = false, updatable = false)})

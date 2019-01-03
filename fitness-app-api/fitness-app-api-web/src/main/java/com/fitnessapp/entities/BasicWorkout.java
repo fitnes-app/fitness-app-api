@@ -35,7 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
 	@NamedQuery(name = "BasicWorkout.findAll", query = "SELECT b FROM BasicWorkout b"),
-	@NamedQuery(name = "BasicWorkout.findById", query = "SELECT b FROM BasicWorkout b WHERE b.id = :id")})
+	@NamedQuery(name = "BasicWorkout.findById", query = "SELECT b FROM BasicWorkout b WHERE b.id = :id"),
+        @NamedQuery(name = "BasicWorkout.findByDuration", query = "SELECT b FROM BasicWorkout b WHERE b.duration = :duration"),
+})
 public class BasicWorkout implements Serializable {
 
 	private static final long serialVersionUID = 1L;
