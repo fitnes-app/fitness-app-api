@@ -35,7 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
 	@NamedQuery(name = "AdvancedWorkout.findAll", query = "SELECT a FROM AdvancedWorkout a"),
-	@NamedQuery(name = "AdvancedWorkout.findById", query = "SELECT a FROM AdvancedWorkout a WHERE a.id = :id")})
+	@NamedQuery(name = "AdvancedWorkout.findById", query = "SELECT a FROM AdvancedWorkout a WHERE a.id = :id"),
+        @NamedQuery(name = "AdvancedWorkout.findByDuration", query = "SELECT b FROM AdvancedWorkout b WHERE b.duration = :duration"),
+})
 public class AdvancedWorkout implements Serializable {
 
 	private static final long serialVersionUID = 1L;
