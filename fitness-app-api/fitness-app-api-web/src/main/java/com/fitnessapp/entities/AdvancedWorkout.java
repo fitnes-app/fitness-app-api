@@ -35,7 +35,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
 	@NamedQuery(name = "AdvancedWorkout.findAll", query = "SELECT a FROM AdvancedWorkout a"),
-	@NamedQuery(name = "AdvancedWorkout.findById", query = "SELECT a FROM AdvancedWorkout a WHERE a.id = :id")})
+	@NamedQuery(name = "AdvancedWorkout.findById", query = "SELECT a FROM AdvancedWorkout a WHERE a.id = :id"),
+        @NamedQuery(name = "AdvancedWorkout.findByDuration", query = "SELECT b FROM AdvancedWorkout b WHERE b.duration = :duration"),
+})
 public class AdvancedWorkout implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -44,15 +46,18 @@ public class AdvancedWorkout implements Serializable {
         @Basic(optional = false)
         @Column(nullable = false)
 	private Integer id;
+        private String name;
+        private Integer duration;
 	@JoinColumn(name = "body_type_id", referencedColumnName = "id")
         @ManyToOne(fetch = FetchType.EAGER)
 	private BodyType bodyTypeId;
-	@OneToMany(mappedBy = "advancedWorkoutId", fetch = FetchType.EAGER)
-        @XmlTransient
-	private transient List<AdvancedExercise> advancedExerciseList;
+
 	@OneToMany(mappedBy = "advancedWorkoutId", fetch = FetchType.EAGER)
         @XmlTransient
 	private transient List<DailyAdvancedWorkout> dailyAdvancedWorkoutList;
+        @OneToMany(mappedBy = "advancedWorkoutId", fetch = FetchType.EAGER)
+        @XmlTransient
+        private transient List<Client> clientList;
 
 	public AdvancedWorkout() {
 	}
@@ -69,6 +74,22 @@ public class AdvancedWorkout implements Serializable {
 		this.id = id;
 	}
 
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Integer getDuration() {
+            return duration;
+        }
+
+        public void setDuration(Integer duration) {
+            this.duration = duration;
+        }
+
 	public BodyType getBodyTypeId() {
 		return bodyTypeId;
 	}
@@ -76,16 +97,7 @@ public class AdvancedWorkout implements Serializable {
 	public void setBodyTypeId(BodyType bodyTypeId) {
 		this.bodyTypeId = bodyTypeId;
 	}
-
-	@XmlTransient
-	public List<AdvancedExercise> getAdvancedExerciseList() {
-		return advancedExerciseList;
-	}
-
-	public void setAdvancedExerciseList(List<AdvancedExercise> advancedExerciseList) {
-		this.advancedExerciseList = advancedExerciseList;
-	}
-
+        
 	@XmlTransient
 	public List<DailyAdvancedWorkout> getDailyAdvancedWorkoutList() {
 		return dailyAdvancedWorkoutList;
@@ -94,6 +106,14 @@ public class AdvancedWorkout implements Serializable {
 	public void setDailyAdvancedWorkoutList(List<DailyAdvancedWorkout> dailyAdvancedWorkoutList) {
 		this.dailyAdvancedWorkoutList = dailyAdvancedWorkoutList;
 	}
+        @XmlTransient
+        public List<Client> getClientList() {
+            return clientList;
+        }
+
+        public void setClientList(List<Client> clientList) {
+            this.clientList = clientList;
+        }
 
 	@Override
 	public int hashCode() {
