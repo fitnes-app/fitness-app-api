@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -30,13 +31,15 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Naluem
  */
 @Entity
-@Table(name = "basic_workout", catalog = "fitnessapp", schema = "public")
+@Table(name = "basic_workout", catalog = "fitnessapp", schema = "public", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"name"})})
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
 	@NamedQuery(name = "BasicWorkout.findAll", query = "SELECT b FROM BasicWorkout b"),
 	@NamedQuery(name = "BasicWorkout.findById", query = "SELECT b FROM BasicWorkout b WHERE b.id = :id"),
         @NamedQuery(name = "BasicWorkout.findByDuration", query = "SELECT b FROM BasicWorkout b WHERE b.duration = :duration"),
+        @NamedQuery(name = "BasicWorkout.findByName", query = "SELECT a FROM BasicWorkout a WHERE a.name = :name"),
 })
 public class BasicWorkout implements Serializable {
 

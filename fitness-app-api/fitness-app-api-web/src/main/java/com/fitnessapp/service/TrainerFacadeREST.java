@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -82,7 +83,14 @@ public class TrainerFacadeREST extends AbstractFacade<Trainer> {
 	public String countREST() {
 		return String.valueOf(super.count());
 	}
-
+        @GET
+        @Path("findByEmail/{email}")
+        @Produces({MediaType.APPLICATION_JSON})
+        public List<Trainer> findByEmail(@PathParam("email") String email) {
+            TypedQuery<Trainer> consultaTrainer = this.em.createNamedQuery("Trainer.findByMail", Trainer.class);
+            consultaTrainer.setParameter("mail", email);
+            return consultaTrainer.getResultList();
+        }
 	@Override
 	protected EntityManager getEntityManager() {
 		return em;

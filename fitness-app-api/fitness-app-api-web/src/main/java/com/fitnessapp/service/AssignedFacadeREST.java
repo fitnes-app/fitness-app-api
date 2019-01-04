@@ -86,6 +86,14 @@ public class AssignedFacadeREST extends AbstractFacade<Assigned> {
             return consultaAssigned.getResultList();
         }
 
+        @GET
+        @Path("findByTrainerId/{trainerId}")
+        @Produces({MediaType.APPLICATION_JSON})
+        public List<Assigned> findByTrainerId(@PathParam("trainerId") String trainerId) {
+            TypedQuery<Assigned> consultaAssigned = this.em.createNamedQuery("Assigned.findByTrainerId", Assigned.class);
+            consultaAssigned.setParameter("id", Integer.parseInt(trainerId));
+            return consultaAssigned.getResultList();
+        }
 	@GET
         @Path("count")
         @Produces(MediaType.TEXT_PLAIN)
