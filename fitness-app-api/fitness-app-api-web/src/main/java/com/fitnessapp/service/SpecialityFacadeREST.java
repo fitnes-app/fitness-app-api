@@ -77,10 +77,10 @@ public class SpecialityFacadeREST extends AbstractFacade<Speciality>{
         return super.findRange(new int[]{from, to});
     }
     
-      @GET
+    @GET
     @Path("findBySpecialityName/{name}")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Speciality> findByEmail(@PathParam("name") String name) {
+    public List<Speciality> findByName(@PathParam("name") String name) {
         TypedQuery<Speciality> consultaTrainer = this.em.createNamedQuery("Speciality.findBySpecialityName", Speciality.class);
         consultaTrainer.setParameter("specialityName", name);
         return consultaTrainer.getResultList();
