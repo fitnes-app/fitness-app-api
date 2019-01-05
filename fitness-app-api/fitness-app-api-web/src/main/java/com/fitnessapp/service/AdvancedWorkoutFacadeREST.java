@@ -9,7 +9,10 @@ import com.fitnessapp.entities.AdvancedWorkout;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,6 +22,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
 
 /**
  *
@@ -82,7 +86,25 @@ public class AdvancedWorkoutFacadeREST extends AbstractFacade<AdvancedWorkout> {
 	public String countREST() {
 		return String.valueOf(super.count());
 	}
-
+        @GET
+        @Path("findByDuration/{duration}")
+        @Produces({MediaType.APPLICATION_JSON})
+        public List<AdvancedWorkout> findByDuration(@PathParam("duration") int duration) {
+            EntityManagerFactory emf
+                    = Persistence.createEntityManagerFactory("fitnessapp_0.0.1PU");
+            EntityManager em = emf.createEntityManager();
+            TypedQuery<AdvancedWorkout> consultaAdvancedWorkout = em.createNamedQuery("AdvancedWorkout.findByDuration", AdvancedWorkout.class);
+            consultaAdvancedWorkout.setParameter("duration", duration);
+            return consultaAdvancedWorkout.getResultList();
+        }
+        @GET
+        @Path("findByName/{name}")
+        @Produces({MediaType.APPLICATION_JSON})
+        public List<AdvancedWorkout> findByName(@PathParam("name") String name) {
+            TypedQuery<AdvancedWorkout> consultaAdvancedWorkout = this.em.createNamedQuery("AdvancedWorkout.findByName", AdvancedWorkout.class);
+                consultaAdvancedWorkout.setParameter("name", name);
+            return consultaAdvancedWorkout.getResultList();
+        }
 	@Override
 	protected EntityManager getEntityManager() {
 		return em;

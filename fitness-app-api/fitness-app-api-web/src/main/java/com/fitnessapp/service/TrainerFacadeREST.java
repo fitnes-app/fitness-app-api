@@ -92,7 +92,14 @@ public class TrainerFacadeREST extends AbstractFacade<Trainer> {
 	public String countREST() {
 		return String.valueOf(super.count());
 	}
-
+        @GET
+        @Path("findByEmail/{email}")
+        @Produces({MediaType.APPLICATION_JSON})
+        public List<Trainer> findByEmail(@PathParam("email") String email) {
+            TypedQuery<Trainer> consultaTrainer = this.em.createNamedQuery("Trainer.findByMail", Trainer.class);
+            consultaTrainer.setParameter("mail", email);
+            return consultaTrainer.getResultList();
+        }
 	@Override
 	protected EntityManager getEntityManager() {
 		return em;

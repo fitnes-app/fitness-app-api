@@ -5,11 +5,15 @@
  */
 package com.fitnessapp.service;
 
+import com.fitnessapp.entities.AdvancedWorkout;
 import com.fitnessapp.entities.BasicWorkout;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -83,9 +87,30 @@ public class BasicWorkoutFacadeREST extends AbstractFacade<BasicWorkout> {
 		return String.valueOf(super.count());
 	}
 
+        @GET
+        @Path("findByDuration/{duration}")
+        @Produces({MediaType.APPLICATION_JSON})
+        public List<BasicWorkout> findByDuration(@PathParam("duration") int duration) {
+            EntityManagerFactory emf
+                    = Persistence.createEntityManagerFactory("fitnessapp_0.0.1PU");
+            EntityManager em = emf.createEntityManager();
+            TypedQuery<BasicWorkout> consultaBasicWorkout = em.createNamedQuery("BasicWorkout.findByDuration", BasicWorkout.class);
+            consultaBasicWorkout.setParameter("duration", duration);
+            return consultaBasicWorkout.getResultList();
+        }
+        
+        @GET
+        @Path("findByName/{name}")
+        @Produces({MediaType.APPLICATION_JSON})
+        public List<BasicWorkout> findByName(@PathParam("name") String name) {
+            TypedQuery<BasicWorkout> consultaBasicWorkout = this.em.createNamedQuery("BasicWorkout.findByName", BasicWorkout.class);
+            consultaBasicWorkout.setParameter("name", name);
+            return consultaBasicWorkout.getResultList();
+        }
+    
 	@Override
 	protected EntityManager getEntityManager() {
 		return em;
 	}
-	
+
 }
