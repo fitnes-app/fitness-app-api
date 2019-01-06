@@ -6,6 +6,7 @@
 package com.fitnessapp.service;
 
 import com.fitnessapp.entities.Administrator;
+import com.fitnessapp.entities.AdvancedExercise;
 import com.fitnessapp.entities.DailyAdvancedWorkout;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -97,6 +98,18 @@ public class DailyAdvancedWorkoutFacadeREST extends AbstractFacade<DailyAdvanced
             TypedQuery<DailyAdvancedWorkout> consultaDailyAdvancedWorkout = em.createNamedQuery("DailyAdvancedWorkout.findByAdvancedWorkoutId", DailyAdvancedWorkout.class);
             consultaDailyAdvancedWorkout.setParameter("id", Integer.parseInt(id));
             return consultaDailyAdvancedWorkout.getResultList();
+        }
+        
+        @GET
+        @Path("findDailyExercises/{id}")
+        @Produces({MediaType.APPLICATION_JSON})
+        public List<DailyAdvancedWorkout> findDailyExercises(@PathParam("id") int id) {
+            EntityManagerFactory emf
+                    = Persistence.createEntityManagerFactory("fitnessapp_0.0.1PU");
+            EntityManager em = emf.createEntityManager();
+            TypedQuery<DailyAdvancedWorkout> consultaAdvancedExercise = em.createNamedQuery("DailyAdvancedWorkout.findDailyExercises", DailyAdvancedWorkout.class);
+            consultaAdvancedExercise.setParameter("id", id);
+            return consultaAdvancedExercise.getResultList();
         }
 	@Override
 	protected EntityManager getEntityManager() {

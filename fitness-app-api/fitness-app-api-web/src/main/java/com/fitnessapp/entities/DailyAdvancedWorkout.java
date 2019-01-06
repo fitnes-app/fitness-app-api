@@ -7,6 +7,7 @@ package com.fitnessapp.entities;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -22,6 +23,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -39,7 +41,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
 	@NamedQuery(name = "DailyAdvancedWorkout.findAll", query = "SELECT d FROM DailyAdvancedWorkout d"),
 	@NamedQuery(name = "DailyAdvancedWorkout.findById", query = "SELECT d FROM DailyAdvancedWorkout d WHERE d.id = :id"),
-        @NamedQuery(name = "DailyAdvancedWorkout.findByAdvancedWorkoutId", query = "SELECT d FROM DailyAdvancedWorkout d WHERE d.advancedWorkoutId.id = :id")
+        @NamedQuery(name = "DailyAdvancedWorkout.findByAdvancedWorkoutId", query = "SELECT d FROM DailyAdvancedWorkout d WHERE d.advancedWorkoutId.id = :id"),
+        @NamedQuery(name = "DailyAdvancedWorkout.findDailyExercises", query = "SELECT d.advancedExercises FROM DailyAdvancedWorkout d WHERE d.id = :id")
 })
 public class DailyAdvancedWorkout implements Serializable {
 
@@ -56,7 +59,7 @@ public class DailyAdvancedWorkout implements Serializable {
         @ManyToOne(fetch = FetchType.EAGER)
 	private AdvancedWorkout advancedWorkoutId;
 
-        @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+        @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
         @JoinTable(name = "adv_daily_exercise_assign", joinColumns = {
         @JoinColumn(name = "daily_adv_workout_id", nullable = false, updatable = false)},
             inverseJoinColumns = {
@@ -64,7 +67,7 @@ public class DailyAdvancedWorkout implements Serializable {
                         nullable = false, updatable = false)})
         
         private  Set<AdvancedExercise> advancedExercises = new HashSet<AdvancedExercise>(0);
-        
+       
 	public DailyAdvancedWorkout() {
 	}
 
@@ -105,7 +108,7 @@ public class DailyAdvancedWorkout implements Serializable {
             this.advancedExercises = advancedExercise;
         }
 
-
+        
 	@Override
 	public int hashCode() {
 		int hash = 0;

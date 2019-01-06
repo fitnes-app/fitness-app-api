@@ -100,10 +100,10 @@ public class AdvancedWorkoutFacadeREST extends AbstractFacade<AdvancedWorkout> {
         @GET
         @Path("findByName/{name}")
         @Produces({MediaType.APPLICATION_JSON})
-        public List<AdvancedWorkout> findByName(@PathParam("name") String name) {
+        public AdvancedWorkout findByName(@PathParam("name") String name) {
             TypedQuery<AdvancedWorkout> consultaAdvancedWorkout = this.em.createNamedQuery("AdvancedWorkout.findByName", AdvancedWorkout.class);
                 consultaAdvancedWorkout.setParameter("name", name);
-            return consultaAdvancedWorkout.getResultList();
+            return consultaAdvancedWorkout.getSingleResult();
         }
 	@Override
 	protected EntityManager getEntityManager() {
