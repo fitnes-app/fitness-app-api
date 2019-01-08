@@ -76,14 +76,8 @@ public class TrainerFacadeREST extends AbstractFacade<Trainer> {
 	public List<Trainer> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
 		return super.findRange(new int[]{from, to});
 	}
-
-	@GET
-        @Path("count")
-        @Produces(MediaType.TEXT_PLAIN)
-	public String countREST() {
-		return String.valueOf(super.count());
-	}
-        @GET
+        
+                @GET
         @Path("findByEmail/{email}")
         @Produces({MediaType.APPLICATION_JSON})
         public List<Trainer> findByEmail(@PathParam("email") String email) {
@@ -91,6 +85,14 @@ public class TrainerFacadeREST extends AbstractFacade<Trainer> {
             consultaTrainer.setParameter("mail", email);
             return consultaTrainer.getResultList();
         }
+
+	@GET
+        @Path("count")
+        @Produces(MediaType.TEXT_PLAIN)
+	public String countREST() {
+		return String.valueOf(super.count());
+	}
+
 	@Override
 	protected EntityManager getEntityManager() {
 		return em;
