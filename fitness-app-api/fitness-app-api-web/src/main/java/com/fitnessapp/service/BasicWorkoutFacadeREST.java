@@ -102,10 +102,10 @@ public class BasicWorkoutFacadeREST extends AbstractFacade<BasicWorkout> {
         @GET
         @Path("findByName/{name}")
         @Produces({MediaType.APPLICATION_JSON})
-        public List<BasicWorkout> findByName(@PathParam("name") String name) {
+        public BasicWorkout findByName(@PathParam("name") String name) {
             TypedQuery<BasicWorkout> consultaBasicWorkout = this.em.createNamedQuery("BasicWorkout.findByName", BasicWorkout.class);
             consultaBasicWorkout.setParameter("name", name);
-            return consultaBasicWorkout.getResultList();
+            return consultaBasicWorkout.getSingleResult();
         }
     
 	@Override

@@ -9,7 +9,10 @@ import com.fitnessapp.entities.AdvancedExercise;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -82,7 +85,17 @@ public class AdvancedExerciseFacadeREST extends AbstractFacade<AdvancedExercise>
 	public String countREST() {
 		return String.valueOf(super.count());
 	}
-
+        @GET
+        @Path("findByMuscularGroupId/{id}")
+        @Produces({MediaType.APPLICATION_JSON})
+        public List<AdvancedExercise> findByMuscularGroupId(@PathParam("id") int id) {
+            EntityManagerFactory emf
+                    = Persistence.createEntityManagerFactory("fitnessapp_0.0.1PU");
+            EntityManager em = emf.createEntityManager();
+            TypedQuery<AdvancedExercise> consultaAdvancedExercise = em.createNamedQuery("AdvancedExercise.findByMuscularGroupId", AdvancedExercise.class);
+            consultaAdvancedExercise.setParameter("id",id);
+            return consultaAdvancedExercise.getResultList();
+        }
 	@Override
 	protected EntityManager getEntityManager() {
 		return em;

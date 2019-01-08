@@ -23,6 +23,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -35,7 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Naluem
  */
 @Entity
-@Table(name = "basic_exercise", catalog = "fitnessapp", schema = "public")
+@Table(name = "basic_exercise", catalog = "fitnessapp", schema = "public", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"exercise_name"})
+})
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({

@@ -23,6 +23,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -35,7 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Naluem
  */
 @Entity
-@Table(name = "advanced_exercise", catalog = "fitnessapp", schema = "public")
+@Table(name = "advanced_exercise", catalog = "fitnessapp", schema = "public",uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"exercise_name"})
+})
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
@@ -44,7 +47,9 @@ import javax.xml.bind.annotation.XmlTransient;
 	@NamedQuery(name = "AdvancedExercise.findByExerciseName", query = "SELECT a FROM AdvancedExercise a WHERE a.exerciseName = :exerciseName"),
 	@NamedQuery(name = "AdvancedExercise.findByDescription", query = "SELECT a FROM AdvancedExercise a WHERE a.description = :description"),
 	@NamedQuery(name = "AdvancedExercise.findByExerciseSets", query = "SELECT a FROM AdvancedExercise a WHERE a.exerciseSets = :exerciseSets"),
-	@NamedQuery(name = "AdvancedExercise.findByRepetitions", query = "SELECT a FROM AdvancedExercise a WHERE a.repetitions = :repetitions")})
+	@NamedQuery(name = "AdvancedExercise.findByRepetitions", query = "SELECT a FROM AdvancedExercise a WHERE a.repetitions = :repetitions"),
+        @NamedQuery(name = "AdvancedExercise.findByMuscularGroupId", query = "SELECT a FROM AdvancedExercise a WHERE a.muscularGroupId.id = :id"),
+})
 public class AdvancedExercise implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -82,7 +87,7 @@ public class AdvancedExercise implements Serializable {
 	@OneToMany(mappedBy = "advancedExerciseId", fetch = FetchType.EAGER)
         @XmlTransient
 	private transient List<AdvancedClientTracking> advancedClientTrackingList;
-
+        
 	public AdvancedExercise() {
 	}
 
@@ -169,6 +174,14 @@ public class AdvancedExercise implements Serializable {
         public void setdailyAdvancedWorkouts(Set<DailyAdvancedWorkout> dailyAdvancedWorkouts) {
             this.dailyAdvancedWorkouts = dailyAdvancedWorkouts;
         }
+
+    public Set<DailyAdvancedWorkout> getDailyAdvancedWorkouts() {
+        return dailyAdvancedWorkouts;
+    }
+
+    public void setDailyAdvancedWorkouts(Set<DailyAdvancedWorkout> dailyAdvancedWorkouts) {
+        this.dailyAdvancedWorkouts = dailyAdvancedWorkouts;
+    }
 
 	@Override
 	public int hashCode() {
