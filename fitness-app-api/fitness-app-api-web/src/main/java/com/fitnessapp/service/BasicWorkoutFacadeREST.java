@@ -5,6 +5,7 @@
  */
 package com.fitnessapp.service;
 
+import com.fitnessapp.entities.AdvancedWorkout;
 import com.fitnessapp.entities.BasicWorkout;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -97,9 +98,19 @@ public class BasicWorkoutFacadeREST extends AbstractFacade<BasicWorkout> {
             consultaBasicWorkout.setParameter("duration", duration);
             return consultaBasicWorkout.getResultList();
         }
+        
+        @GET
+        @Path("findByName/{name}")
+        @Produces({MediaType.APPLICATION_JSON})
+        public List<BasicWorkout> findByName(@PathParam("name") String name) {
+            TypedQuery<BasicWorkout> consultaBasicWorkout = this.em.createNamedQuery("BasicWorkout.findByName", BasicWorkout.class);
+            consultaBasicWorkout.setParameter("name", name);
+            return consultaBasicWorkout.getResultList();
+        }
+    
 	@Override
 	protected EntityManager getEntityManager() {
 		return em;
 	}
-	
+
 }

@@ -32,109 +32,131 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @NamedQueries({
-	@NamedQuery(name = "BasicClientTracking.findAll", query = "SELECT b FROM BasicClientTracking b"),
-	@NamedQuery(name = "BasicClientTracking.findById", query = "SELECT b FROM BasicClientTracking b WHERE b.id = :id"),
-	@NamedQuery(name = "BasicClientTracking.findByTrackingSets", query = "SELECT b FROM BasicClientTracking b WHERE b.trackingSets = :trackingSets"),
-	@NamedQuery(name = "BasicClientTracking.findByRepetitions", query = "SELECT b FROM BasicClientTracking b WHERE b.repetitions = :repetitions")})
+    @NamedQuery(name = "BasicClientTracking.findAll", query = "SELECT b FROM BasicClientTracking b"),
+    @NamedQuery(name = "BasicClientTracking.findById", query = "SELECT b FROM BasicClientTracking b WHERE b.id = :id"),
+    @NamedQuery(name = "BasicClientTracking.findByTrackingSets", query = "SELECT b FROM BasicClientTracking b WHERE b.trackingSets = :trackingSets"),
+    @NamedQuery(name = "BasicClientTracking.findByRepetitions", query = "SELECT b FROM BasicClientTracking b WHERE b.repetitions = :repetitions")})
 public class BasicClientTracking implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	@Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        @Basic(optional = false)
-        @Column(nullable = false)
-	private Integer id;
-	@Basic(optional = false)
-        @NotNull
-        @Column(name = "tracking_sets", nullable = false)
-	private int trackingSets;
-	@Basic(optional = false)
-        @NotNull
-        @Column(nullable = false)
-	private int repetitions;
-	@JoinColumn(name = "basic_exercise_id", referencedColumnName = "id")
-        @ManyToOne(fetch = FetchType.EAGER)
-	private BasicExercise basicExerciseId;
-	@JoinColumn(name = "client_id", referencedColumnName = "id")
-        @ManyToOne(fetch = FetchType.EAGER)
-	private Client clientId;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private Integer id;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "tracking_sets", nullable = false)
+    private int trackingSets;
+    @Basic(optional = false)
+    @NotNull
+    @Column(nullable = false)
+    private int repetitions;
+    @Basic(optional = false)
+    @Column(name = "date")
+    private int date;
+    @Basic(optional = false)
+    @Column(name = "kcal")
+    private int kcal;
+    @JoinColumn(name = "basic_exercise_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private BasicExercise basicExerciseId;
+    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Client clientId;
 
-	public BasicClientTracking() {
-	}
+    public BasicClientTracking() {
+    }
 
-	public BasicClientTracking(Integer id) {
-		this.id = id;
-	}
+    public BasicClientTracking(Integer id) {
+        this.id = id;
+    }
 
-	public BasicClientTracking(Integer id, int trackingSets, int repetitions) {
-		this.id = id;
-		this.trackingSets = trackingSets;
-		this.repetitions = repetitions;
-	}
+    public BasicClientTracking(Integer id, int trackingSets, int repetitions) {
+        this.id = id;
+        this.trackingSets = trackingSets;
+        this.repetitions = repetitions;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public int getTrackingSets() {
-		return trackingSets;
-	}
+    public int getTrackingSets() {
+        return trackingSets;
+    }
 
-	public void setTrackingSets(int trackingSets) {
-		this.trackingSets = trackingSets;
-	}
+    public void setTrackingSets(int trackingSets) {
+        this.trackingSets = trackingSets;
+    }
 
-	public int getRepetitions() {
-		return repetitions;
-	}
+    public int getRepetitions() {
+        return repetitions;
+    }
 
-	public void setRepetitions(int repetitions) {
-		this.repetitions = repetitions;
-	}
+    public void setRepetitions(int repetitions) {
+        this.repetitions = repetitions;
+    }
 
-	public BasicExercise getBasicExerciseId() {
-		return basicExerciseId;
-	}
+    public int getDate() {
+        return date;
+    }
 
-	public void setBasicExerciseId(BasicExercise basicExerciseId) {
-		this.basicExerciseId = basicExerciseId;
-	}
+    public void setDate(int date) {
+        this.date = date;
+    }
 
-	public Client getClientId() {
-		return clientId;
-	}
+    public int getKcal() {
+        return kcal;
+    }
 
-	public void setClientId(Client clientId) {
-		this.clientId = clientId;
-	}
+    public void setKcal(int kcal) {
+        this.kcal = kcal;
+    }
 
-	@Override
-	public int hashCode() {
-		int hash = 0;
-		hash += (id != null ? id.hashCode() : 0);
-		return hash;
-	}
+    public BasicExercise getBasicExerciseId() {
+        return basicExerciseId;
+    }
 
-	@Override
-	public boolean equals(Object object) {
-		// TODO: Warning - this method won't work in the case the id fields are not set
-		if (!(object instanceof BasicClientTracking)) {
-			return false;
-		}
-		BasicClientTracking other = (BasicClientTracking) object;
-		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-			return false;
-		}
-		return true;
-	}
+    public void setBasicExerciseId(BasicExercise basicExerciseId) {
+        this.basicExerciseId = basicExerciseId;
+    }
 
-	@Override
-	public String toString() {
-		return "com.fitnessapp.entities.BasicClientTracking[ id=" + id + " ]";
-	}
-	
+    public Client getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(Client clientId) {
+        this.clientId = clientId;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof BasicClientTracking)) {
+            return false;
+        }
+        BasicClientTracking other = (BasicClientTracking) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.fitnessapp.entities.BasicClientTracking[ id=" + id + " ]";
+    }
+
 }
