@@ -50,8 +50,8 @@ public class FCMNotification {
 		    //data.put("notification", info);
 		    
 		    //data message
-		    info.put("title", "FCM Data Title"); // Notification title
-		    info.put("body", "Hello First Test data"); // Notification body
+		    info.put("title", "Fit 4 u notification"); // Notification title
+		    info.put("body", "A new TAG has been created"); // Notification body
 		    data.put("data", info);
 
 		    OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());

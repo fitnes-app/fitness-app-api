@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -32,19 +33,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
 	@NamedQuery(name = "Token.findAll", query = "SELECT t FROM Token t"),
 	@NamedQuery(name = "Token.findById", query = "SELECT t FROM Token t WHERE t.id = :id")})
+@SequenceGenerator(name = "token_seq", sequenceName = "token_seq", allocationSize = 1)
 public class Token implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "token_seq")
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
     
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "token", nullable = false, length = 200)
+    @Column(name = "token", nullable = false)
     private String token;
 
     public Integer getId() {
