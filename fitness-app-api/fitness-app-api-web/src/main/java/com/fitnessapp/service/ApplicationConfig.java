@@ -51,6 +51,7 @@ public class ApplicationConfig extends Application {
         resources.add(com.fitnessapp.service.SpecificTipFacadeREST.class);
         resources.add(com.fitnessapp.service.SurveyFacadeREST.class);
         resources.add(com.fitnessapp.service.TagFacadeREST.class);
+        resources.add(com.fitnessapp.service.TokenFacadeREST.class);
         resources.add(com.fitnessapp.service.TrainerFacadeREST.class);
 	}
 	
