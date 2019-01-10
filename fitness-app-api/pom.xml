@@ -7,8 +7,8 @@
   <packaging>pom</packaging>
   <name>fitness-app-api</name>
   <modules>
-    <module>fitness-app-api-ear</module>
     <module>fitness-app-api-web</module>
     <module>fitness-app-api-ejb</module>
+    <module>fitness-app-api-ear</module>
   </modules>
 </project>

@@ -11,7 +11,6 @@
     <artifactId>fitness-app-api-web</artifactId>
     <version>0.0.1</version>
     <packaging>war</packaging>
-
     <name>fitness-app-api-web</name>
 
     <properties>
@@ -67,6 +66,11 @@
             <artifactId>javax.ws.rs-api</artifactId>
             <version>2.1</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20131018</version>
         </dependency>
         <dependency>
             <groupId>javax</groupId>
