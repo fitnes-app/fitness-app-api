@@ -46,6 +46,10 @@ public class DailyTip implements Serializable {
         @Size(min = 1, max = 300)
         @Column(nullable = false, length = 300)
 	private String text;
+
+        @Temporal(TemporalType.DATE)
+        @Column(nullable = false)
+        private Date date;
         
 	public DailyTip() {
 	}
@@ -74,6 +78,15 @@ public class DailyTip implements Serializable {
 	public void setText(String text) {
 		this.text = text;
 	}
+
+        public Date getDate() {
+            return date;
+        }
+
+        public void setDate(Date date) {
+            this.date = date;
+        }
+
 	@Override
 	public int hashCode() {
 		int hash = 0;

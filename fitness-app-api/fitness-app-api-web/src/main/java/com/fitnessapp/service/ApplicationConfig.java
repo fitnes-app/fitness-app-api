@@ -42,7 +42,6 @@ public class ApplicationConfig extends Application {
         resources.add(com.fitnessapp.service.CustomRoutineFacadeREST.class);
         resources.add(com.fitnessapp.service.DailyAdvancedWorkoutFacadeREST.class);
         resources.add(com.fitnessapp.service.DailyBasicWorkoutFacadeREST.class);
-        resources.add(com.fitnessapp.service.DailyTipFacadeREST.class);
         resources.add(com.fitnessapp.service.MeasurementFacadeREST.class);
         resources.add(com.fitnessapp.service.MuscularGroupFacadeREST.class);
         resources.add(com.fitnessapp.service.QuestionFacadeREST.class);
