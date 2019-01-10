@@ -35,7 +35,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "BasicClientTracking.findAll", query = "SELECT b FROM BasicClientTracking b"),
     @NamedQuery(name = "BasicClientTracking.findById", query = "SELECT b FROM BasicClientTracking b WHERE b.id = :id"),
     @NamedQuery(name = "BasicClientTracking.findByTrackingSets", query = "SELECT b FROM BasicClientTracking b WHERE b.trackingSets = :trackingSets"),
-    @NamedQuery(name = "BasicClientTracking.findByRepetitions", query = "SELECT b FROM BasicClientTracking b WHERE b.repetitions = :repetitions")})
+    @NamedQuery(name = "BasicClientTracking.findByRepetitions", query = "SELECT b FROM BasicClientTracking b WHERE b.repetitions = :repetitions"),
+    @NamedQuery(name = "BasicClientTracking.findByClientId", query = "SELECT a FROM BasicClientTracking a WHERE a.clientId.id = :id"),
+})
 public class BasicClientTracking implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,7 +56,7 @@ public class BasicClientTracking implements Serializable {
     private int repetitions;
     @Basic(optional = false)
     @Column(name = "date")
-    private int date;
+    private String date;
     @Basic(optional = false)
     @Column(name = "kcal")
     private int kcal;
@@ -102,11 +104,11 @@ public class BasicClientTracking implements Serializable {
         this.repetitions = repetitions;
     }
 
-    public int getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

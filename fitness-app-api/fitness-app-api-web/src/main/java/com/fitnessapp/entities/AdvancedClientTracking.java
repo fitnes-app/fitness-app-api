@@ -32,7 +32,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "AdvancedClientTracking.findAll", query = "SELECT a FROM AdvancedClientTracking a"),
     @NamedQuery(name = "AdvancedClientTracking.findById", query = "SELECT a FROM AdvancedClientTracking a WHERE a.id = :id"),
     @NamedQuery(name = "AdvancedClientTracking.findByTrackingSets", query = "SELECT a FROM AdvancedClientTracking a WHERE a.trackingSets = :trackingSets"),
-    @NamedQuery(name = "AdvancedClientTracking.findByRepetitions", query = "SELECT a FROM AdvancedClientTracking a WHERE a.repetitions = :repetitions")})
+    @NamedQuery(name = "AdvancedClientTracking.findByRepetitions", query = "SELECT a FROM AdvancedClientTracking a WHERE a.repetitions = :repetitions"),
+    @NamedQuery(name = "AdvancedClientTracking.findByClientId", query = "SELECT a FROM AdvancedClientTracking a WHERE a.clientId.id = :id"),
+})
 public class AdvancedClientTracking implements Serializable {
 
     private static final long serialVersionUID = 1L;
