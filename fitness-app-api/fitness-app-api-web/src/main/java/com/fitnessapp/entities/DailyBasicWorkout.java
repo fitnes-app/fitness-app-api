@@ -22,6 +22,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -38,12 +39,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "DailyBasicWorkout.findAll", query = "SELECT d FROM DailyBasicWorkout d"),
     @NamedQuery(name = "DailyBasicWorkout.findById", query = "SELECT d FROM DailyBasicWorkout d WHERE d.id = :id"),
-    @NamedQuery(name = "DailyBasicWorkout.findByBasicWorkoutId", query = "SELECT d FROM DailyBasicWorkout d WHERE d.basicWorkoutId.id = :id")
+    @NamedQuery(name = "DailyBasicWorkout.findByBasicWorkoutId", query = "SELECT d FROM DailyBasicWorkout d WHERE d.basicWorkoutId.id = :id"),
+    @NamedQuery(name = "DailyBasicWorkout.findDailyExercises", query = "SELECT d.basicExercises FROM DailyBasicWorkout d WHERE d.id = :id")
 })
+@SequenceGenerator(name = "daily_basic_seq", sequenceName = "daily_basic_seq", allocationSize = 1)
+
 public class DailyBasicWorkout implements Serializable{
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "daily_basic_seq")
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
