@@ -53,7 +53,7 @@ public class AdvancedClientTracking implements Serializable {
     private int repetitions;
     @Basic(optional = false)
     @Column(name = "date")
-    private int date;
+    private String date;
     @Basic(optional = false)
     @Column(name = "kcal")
     private int kcal;
@@ -101,11 +101,11 @@ public class AdvancedClientTracking implements Serializable {
         this.repetitions = repetitions;
     }
 
-    public int getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
