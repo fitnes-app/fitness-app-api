@@ -39,11 +39,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Speciality.findAll", query = "SELECT m FROM Speciality m"),
     @NamedQuery(name = "Speciality.findById", query = "SELECT m FROM Speciality m WHERE m.id = :id"),
     @NamedQuery(name = "Speciality.findBySpecialityName", query = "SELECT m FROM Speciality m WHERE m.specialityName = :specialityName")})
+@SequenceGenerator(name = "speciality_seq", sequenceName = "speciality_seq", allocationSize = 1)
 public class Speciality implements Serializable{
     
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "speciality_seq")
     @Basic(optional = false)
     @Column(nullable = false)
     private Integer id;
