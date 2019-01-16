@@ -5,6 +5,7 @@
  */
 package com.fitnessapp.service;
 
+import com.fitnessapp.entities.DailyAdvancedWorkout;
 import com.fitnessapp.entities.DailyBasicWorkout;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -97,6 +98,17 @@ public class DailyBasicWorkoutFacadeREST extends AbstractFacade<DailyBasicWorkou
         return consultaDailyBasicWorkout.getResultList();
     }
 
+    @GET
+    @Path("findDailyExercises/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<DailyBasicWorkout> findDailyExercises(@PathParam("id") int id) {
+        EntityManagerFactory emf
+                = Persistence.createEntityManagerFactory("fitnessapp_0.0.1PU");
+        EntityManager em = emf.createEntityManager();
+        TypedQuery<DailyBasicWorkout> consultaAdvancedExercise = em.createNamedQuery("DailyBasicWorkout.findDailyExercises", DailyBasicWorkout.class);
+        consultaAdvancedExercise.setParameter("id", id);
+        return consultaAdvancedExercise.getResultList();
+    }
     @Override
     protected EntityManager getEntityManager() {
         return em;

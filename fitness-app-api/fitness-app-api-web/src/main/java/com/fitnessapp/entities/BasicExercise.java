@@ -47,7 +47,9 @@ import javax.xml.bind.annotation.XmlTransient;
 	@NamedQuery(name = "BasicExercise.findByExerciseName", query = "SELECT b FROM BasicExercise b WHERE b.exerciseName = :exerciseName"),
 	@NamedQuery(name = "BasicExercise.findByDescription", query = "SELECT b FROM BasicExercise b WHERE b.description = :description"),
 	@NamedQuery(name = "BasicExercise.findByExerciseSets", query = "SELECT b FROM BasicExercise b WHERE b.exerciseSets = :exerciseSets"),
-	@NamedQuery(name = "BasicExercise.findByRepetitions", query = "SELECT b FROM BasicExercise b WHERE b.repetitions = :repetitions")})
+	@NamedQuery(name = "BasicExercise.findByRepetitions", query = "SELECT b FROM BasicExercise b WHERE b.repetitions = :repetitions"),
+        @NamedQuery(name = "BasicExercise.findByMuscularGroupId", query = "SELECT a FROM BasicExercise a WHERE a.muscularGroupId.id = :id"),
+})
 public class BasicExercise implements Serializable {
 
 	private static final long serialVersionUID = 1L;

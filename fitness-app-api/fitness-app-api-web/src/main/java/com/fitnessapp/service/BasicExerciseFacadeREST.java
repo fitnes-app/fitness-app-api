@@ -5,11 +5,15 @@
  */
 package com.fitnessapp.service;
 
+import com.fitnessapp.entities.AdvancedExercise;
 import com.fitnessapp.entities.BasicExercise;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -87,5 +91,15 @@ public class BasicExerciseFacadeREST extends AbstractFacade<BasicExercise> {
 	protected EntityManager getEntityManager() {
 		return em;
 	}
-	
+	@GET
+        @Path("findByMuscularGroupId/{id}")
+        @Produces({MediaType.APPLICATION_JSON})
+        public List<BasicExercise> findByMuscularGroupId(@PathParam("id") int id) {
+            EntityManagerFactory emf
+                    = Persistence.createEntityManagerFactory("fitnessapp_0.0.1PU");
+            EntityManager em = emf.createEntityManager();
+            TypedQuery<BasicExercise> consultaAdvancedExercise = em.createNamedQuery("BasicExercise.findByMuscularGroupId", BasicExercise.class);
+            consultaAdvancedExercise.setParameter("id", id);
+            return consultaAdvancedExercise.getResultList();
+        }
 }
